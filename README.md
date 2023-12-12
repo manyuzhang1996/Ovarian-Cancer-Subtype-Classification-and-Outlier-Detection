@@ -82,12 +82,12 @@ Train autoencoder to learn non-outliers’ pattern and predict outliers, no need
 1. Clone the project
 
 ```bash
-git clone https://github.com/manyuzhang1996/FAANG-Stock-Price-Prediction-under-Layoffs-and-AI-Boost.git
+git clone https://github.com/manyuzhang1996/Ovarian-Cancer-Subtype-Classification-and-Outlier-Detection.git
 ```
 
 2. Navigate to the project directory
 ```bash
-cd FAANG-Stock-Price-Prediction-under-Layoffs-and-AI-Boost
+cd Ovarian-Cancer-Subtype-Classification-and-Outlier-Detection
 ```
 
 ## Contact Authors
