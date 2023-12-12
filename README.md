@@ -1,45 +1,78 @@
 
-# FAANG Stock Price Prediction under Tech Layoffs and AI Boost
+# Ovarian Cancer Subtype Classification and Outlier Detection
 
-A project leverages historical news and stock price data and the latest news and stock price data to perform stock price prediction in technical industry.
+A solution for Kaggle Competition, training auto-encoder for outlier detection and multiple deep learning models for cancer subtype classification. 
 
-![Methodology](https://github.com/manyuzhang1996/Stock-Price-Prediction-with-News/assets/111943220/69f5d44c-04eb-43f8-bbac-79dc72df1b2f)
+By building the integrated model of auto-encoder and classifion neural network, successfully identify potential outliers and subtypes.
 
+<img width="1520" alt="OCEAN-Optional-Figure" src="https://github.com/manyuzhang1996/Ovarian-Cancer-Subtype-Classification-and-Outlier-Detection/assets/111943220/cdcaa810-0120-46ea-9710-3a3250ff507a">
 
 ## Tech Stack
 * Python
-* TensorFlow: https://github.com/tensorflow/tensorflow
+* TensorFlow
+* VGG19
+* EfficientNetV2S
+* ResNet50
+* Auto-encoder
 
 
 ## Data Source
-The historical news and stock price data are from Kaggle: https://www.kaggle.com/datasets/deepakjoshi2k/yahoo-stock-prediction-by-news?select=NEWS_YAHOO_stock_prediction.csv
-The latest news and stock price data are scrapped from Finviz and Yahoo Finance. 
-The data are about FAANG companies:
-1. Facebook (Meta)
-2. Amazon
-3. Apple
-4. Netflix
-5. Google
+<img width="1520" alt="OCEAN-Optional-Figure" src="https://github.com/manyuzhang1996/Ovarian-Cancer-Subtype-Classification-and-Outlier-Detection/assets/111943220/fbeb09a2-6a21-4bb6-9318-7eea94899650">
 
-**Latest (Scapped) News Statistics:**
-<!-- Latest News Statistics Image 1 -->
-<img src="https://github.com/manyuzhang1996/FAANG-Stock-Price-Prediction-under-Layoffs-and-AI-Boost/assets/111943220/86a2b571-d7e6-4498-9ba8-404613501aa2" alt="Latest News Statistics Image 1" width="400">
+**train/test_images**: A folder containing the relevant images. There are two categories of images: whole slide images (WSI) and tissue microarray (TMA). Whole slide images are at 20x magnification and can be quite large. The TMAs are smaller (roughly 4,000x4,000 pixels) but at 40x magnification.
 
+The test set contains images from different source hospitals than the train set, with the largest area images almost 100,000 x 50,000 pixels. We strongly recommend taking an expansive approach to thinking about the scenarios your error handling should manage, including differences in image dimensions, quality, slide staining techniques, and more. Expect roughly 2,000 images in the test set, the majority of which are TMAs. 
 
-<!-- Latest News Statistics Image 2 -->
-<img src="https://github.com/manyuzhang1996/FAANG-Stock-Price-Prediction-under-Layoffs-and-AI-Boost/assets/111943220/870a5457-cde7-4376-8882-7c4ce3d4549d" alt="Latest News Statistics Image 2" width="400">
+The total size is 550 GB so simply loading the data will be time consuming. Be warned that the test set was specifically constructed to assess how well models generalize.
+
+**train/test.csv**: Labels for the train set.
+
+image_id - A unique ID code for each image.
+
+label - The target class. One of these subtypes of ovarian cancer: CC, EC, HGSC, LGSC, MC, Other. The Other class is not present in the training set; identifying outliers is one of the challenges of this competition. Only available for the train set.
+
+image_width - The image width in pixels.
+
+image_height - The image height in pixels.
+
+is_tma - True if the slide is a tissue microarray. Only available for the train set.
+
+**train/test_thumbnails**: A folder containing smaller .png copies of the whole slide images. Thumbnails are not provided for TMAs.
+
+## Problem formation and solution
+_**1.Subtype Classification:**_
+
+  Subtype classification is a multi-class (5-classes) classification problem.
+  
+  **Difficulties**:
+  1) Number of images is less
+  2) Class distribution is imbalanced
+  3) Image size is too large, high resolution
+     
+  **Solution**: 
+  Train multi-class classification neural network based on balanced and processed images.
+
+_**2.Outlier Detection:**_
+
+Outlier detection is predicting if a given image is one of the subtypes or not.
+
+**Difficulties**:
+1) No “outlier” image sample given
+2) No clear model selection guidance
+
+**Solution**: 
+Train autoencoder to learn non-outliers’ pattern and predict outliers, no need of “outlier” image.
 
  
 ## Project Architecture
 
-1. Collect data from multiple sources about FANNG companies
-2. Perform text mining on historical and the latest news data
-3. Calculate sentiment score for news
-4. Build LDA topic model for text understanding
-5. Build classifiers to predict stock price trend (up and down) with news
-6. Build time series deep learning model to predict actual stock price
+1. Process the image data
+2. Balance the data distribution among subtypes while augmenting them
+3. Build auto-encoder to differentiate outliers and known subtypes
+4. Fine-tuned VGG19-based, ResNet50-based and EfficientNetV2S-based model to predict subtypes
+5. Integrate auto-encoder with best performing classification model to predict test images
 
-![Methodology](https://github.com/manyuzhang1996/Stock-Price-Prediction-with-News/assets/111943220/69f5d44c-04eb-43f8-bbac-79dc72df1b2f)
+<img width="1520" alt="OCEAN-Optional-Figure" src="https://github.com/manyuzhang1996/Ovarian-Cancer-Subtype-Classification-and-Outlier-Detection/assets/111943220/cdcaa810-0120-46ea-9710-3a3250ff507a">
 
 
 
@@ -62,4 +95,6 @@ Manyu Zhang (zhangmanyuzmy@gmail.com)
 
 Hui Yun
 
-Maria Hovhannisyan
+Richard Lu
+
+Jason Djuandy
